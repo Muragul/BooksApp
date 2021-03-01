@@ -1,19 +1,17 @@
-package com.example.booksapp.ui.main
+package com.example.booksapp.ui.main.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.booksapp.App
 import com.example.booksapp.R
-import com.example.booksapp.data.db.Book
 import com.example.booksapp.ui.main.adapter.BookListAdapter
+import com.example.booksapp.viewmodel.BookViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
-
-    private lateinit var viewModel: BookViewModel
+    private val viewModel: BookViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,13 +26,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun initVm() {
-        val app = requireActivity().application as App
-        val repo = app.repository
-        val factory = BookViewModelFactory(repo)
-        viewModel = ViewModelProvider(this, factory).get(BookViewModel::class.java)
-        for (i in 1..10) {
-            viewModel.insert(Book(i, "Name$i", "URL$i"))
-        }
+        viewModel.getBooks()
     }
 
     private fun observeVm() {

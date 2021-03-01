@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.example.booksapp.ui.main.HomeFragment"
+        android:name="com.example.booksapp.ui.main.fragment.HomeFragment"
         android:label="fragment_home">
         <action
             android:id="@+id/action_to_search"
@@ -15,7 +15,7 @@
 
     <fragment
         android:id="@+id/search"
-        android:name="com.example.booksapp.ui.main.SearchFragment"
+        android:name="com.example.booksapp.ui.main.fragment.SearchFragment"
         android:label="fragment_search">
         <action
             android:id="@+id/action_to_profile"
@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/profile"
-        android:name="com.example.booksapp.ui.main.ProfileFragment"
+        android:name="com.example.booksapp.ui.main.fragment.ProfileFragment"
         android:label="fragment_profile" />
 
 </navigation>

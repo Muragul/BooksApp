@@ -1,10 +1,25 @@
 package com.example.booksapp
 
 import android.app.Application
-import com.example.booksapp.data.BookRepository
-import com.example.booksapp.data.db.BookRoomDatabase
+import com.example.booksapp.di.networkModule
+import com.example.booksapp.di.repositoryModule
+import com.example.booksapp.di.useCaseModule
+import com.example.booksapp.di.viewModelModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class App : Application() {
-    private val database by lazy { BookRoomDatabase.getDatabase(this) }
-    val repository by lazy { BookRepository(database.bookDao()) }
+    override fun onCreate() {
+        super.onCreate()
+        startKoin {
+            val appModule = listOf(
+                networkModule,
+                viewModelModule,
+                useCaseModule,
+                repositoryModule
+            )
+            androidContext(this@App)
+            modules(appModule)
+        }
+    }
 }
