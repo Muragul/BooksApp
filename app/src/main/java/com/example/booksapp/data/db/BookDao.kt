@@ -4,15 +4,17 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BookDao {
 
-    @Query("SELECT * FROM book_table")
-    fun getBookList(): Flow<List<Book>>
+    @Query("SELECT * FROM books_table")
+    fun getBookList(): List<Book>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(book: Book)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertList(books: List<Book>)
 
 }

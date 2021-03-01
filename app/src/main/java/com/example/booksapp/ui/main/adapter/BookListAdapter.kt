@@ -16,7 +16,7 @@ class BookListAdapter : ListAdapter<Book, BookListAdapter.BookViewHolder>(BOOKS_
         private val bookName: TextView = itemView.findViewById(R.id.book_name)
 
         fun bind(book: Book) {
-            bookName.text = book.name
+            bookName.text = book.title
         }
 
         companion object {
@@ -35,7 +35,7 @@ class BookListAdapter : ListAdapter<Book, BookListAdapter.BookViewHolder>(BOOKS_
             }
 
             override fun areContentsTheSame(oldItem: Book, newItem: Book): Boolean {
-                return oldItem.name == newItem.name
+                return oldItem.title == newItem.title
             }
         }
     }

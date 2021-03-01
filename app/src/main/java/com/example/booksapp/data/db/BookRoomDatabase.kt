@@ -15,12 +15,11 @@ abstract class BookRoomDatabase : RoomDatabase() {
         private var INSTANCE: BookRoomDatabase? = null
 
         fun getDatabase(context: Context): BookRoomDatabase {
-
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     BookRoomDatabase::class.java,
-                    "book_database"
+                    "books_database"
                 ).fallbackToDestructiveMigration().build()
 
                 INSTANCE = instance
