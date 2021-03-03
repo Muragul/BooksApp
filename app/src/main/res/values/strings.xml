@@ -2,4 +2,14 @@
     <string name="app_name">BooksApp</string>
     <string name="profile">Profile</string>
     <string name="search">Search</string>
+    <string name="home">Home</string>
+    <string name="scan">Scan</string>
+
+    <string name="library_toolbar">Library</string>
+    <string name="home_toolbar">Books</string>
+
+    <string name="now_reading_title">Now reading</string>
+    <string name="newly_added_title">Newly added</string>
+
+    <string name="filter_button">Filter</string>
 </resources>

@@ -16,22 +16,25 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        initVm()
         observeVm()
     }
 
     private fun initViews() {
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        recyclerViewNew.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.adapter = BookListAdapter()
-    }
-
-    private fun initVm() {
-        viewModel.getBooks()
+        recyclerViewNew.adapter = BookListAdapter()
     }
 
     private fun observeVm() {
         viewModel.getBooks().observe(viewLifecycleOwner) {
             (recyclerView.adapter as BookListAdapter).submitList(it)
         }
+        viewModel.getBooks().observe(viewLifecycleOwner) {
+            (recyclerViewNew.adapter as BookListAdapter).submitList(it)
+        }
+
     }
 }

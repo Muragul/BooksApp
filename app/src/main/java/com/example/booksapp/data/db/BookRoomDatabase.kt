@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import android.content.Context
 import androidx.room.Room
 
-@Database(entities = [Book::class], version = 1)
+@Database(entities = [Book::class], version = 2)
 abstract class BookRoomDatabase : RoomDatabase() {
 
     abstract fun bookDao(): BookDao
