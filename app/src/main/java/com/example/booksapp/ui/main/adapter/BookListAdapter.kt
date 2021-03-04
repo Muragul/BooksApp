@@ -14,9 +14,11 @@ class BookListAdapter : ListAdapter<Book, BookListAdapter.BookViewHolder>(BOOKS_
 
     class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val bookName: TextView = itemView.findViewById(R.id.book_name)
+        private val bookAuthor: TextView = itemView.findViewById(R.id.book_author)
 
         fun bind(book: Book) {
             bookName.text = book.title
+            bookAuthor.text = book.author
         }
 
         companion object {

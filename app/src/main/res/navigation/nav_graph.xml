@@ -18,13 +18,41 @@
         android:name="com.example.booksapp.ui.main.fragment.SearchFragment"
         android:label="fragment_search">
         <action
+            android:id="@+id/action_to_scan"
+            app:destination="@+id/scan" />
+        <action
+            android:id="@+id/action_to_filter"
+            app:destination="@+id/filter" />
+        <argument
+            android:name="genres"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/scan"
+        android:name="com.example.booksapp.ui.main.fragment.ScanFragment"
+        android:label="fragment_scan">
+        <action
             android:id="@+id/action_to_profile"
-            app:destination="@+id/profile" />
+            app:destination="@id/profile" />
     </fragment>
 
     <fragment
         android:id="@+id/profile"
         android:name="com.example.booksapp.ui.main.fragment.ProfileFragment"
         android:label="fragment_profile" />
+
+    <fragment
+        android:id="@+id/filter"
+        android:name="com.example.booksapp.ui.main.fragment.BottomSheetFragment"
+        android:label="bottom_sheet_fragment">
+        <action
+            android:id="@+id/action_back_to_search"
+            app:destination="@+id/search">
+            <argument
+                android:name="genres"
+                app:argType="integer" />
+        </action>
+    </fragment>
 
 </navigation>

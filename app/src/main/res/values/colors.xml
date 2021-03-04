@@ -10,4 +10,8 @@
 
     <color name="colorLightBackground">#f6ded4</color>
     <color name="colorCoffeeDark">#784643</color>
+
+    <color name="toolbar_background_color">#f6f7f8</color>
+    <color name="toolbar_border_color">#e3e3e3</color>
+    <color name="search_view_background_color">#e4e4e5</color>
 </resources>

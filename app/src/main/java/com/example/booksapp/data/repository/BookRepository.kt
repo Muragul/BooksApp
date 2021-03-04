@@ -13,4 +13,12 @@ class BookRepository(apiService: ApiService, context: Context) : BookListReposit
             service.getBooksListAsync()
         }
     }
+
+    override fun loadData(genreId: Int): Flow<List<Book>> {
+        return fetchDataByGenre(genreId)
+    }
+
+    override fun loadData(title: String): Flow<List<Book>> {
+        return fetchDataByTitle(title)
+    }
 }
