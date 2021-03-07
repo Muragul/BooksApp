@@ -7,24 +7,31 @@ import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface BookDao {
+interface AppDao {
 
     @Query("SELECT * FROM books_table")
-    fun getBookList(): Flow<List<Book>>
+    fun getBookList(): List<Book>
 
     @Query("SELECT * FROM books_table WHERE genre_id = :genreId")
-    fun getBooksByGenre(genreId: Int): Flow<List<Book>>
+    fun getBooksByGenre(genreId: Int): List<Book>
 
     @Query("SELECT * FROM books_table WHERE title = :title")
-    fun getBooksByTitle(title: String): Flow<List<Book>>
+    fun getBooksByTitle(title: String): List<Book>
 
     @Query("SELECT * FROM books_table WHERE isbn = :isbn")
-    fun getBooksByISBN(isbn: String): Flow<List<Book>>
+    fun getBooksByISBN(isbn: String): List<Book>
+
+    @Query("SELECT * FROM books_table where genre_id IN (:genres)")
+    fun getFilteredBooks(genres: List<Int>): List<Book>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(book: Book)
+    fun insertBookList(books: List<Book>)
+
+    //genres
+    @Query("SELECT * FROM genres_table")
+    fun getGenreList(): List<Genre>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertList(books: List<Book>)
+    fun insertGenresList(genres: List<Genre>)
 
 }

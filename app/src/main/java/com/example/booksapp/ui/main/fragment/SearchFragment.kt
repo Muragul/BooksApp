@@ -5,19 +5,17 @@ import android.view.View
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.booksapp.R
+import com.example.booksapp.data.db.Book
 import com.example.booksapp.ui.main.adapter.BookListAdapter
-import com.example.booksapp.viewmodel.BookViewModel
+import com.example.booksapp.viewmodel.SharedViewModel
 import kotlinx.android.synthetic.main.fragment_search.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.lang.Exception
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
-    private val viewModel: BookViewModel by viewModel()
-    private val args: SearchFragmentArgs by navArgs()
+    private val sharedViewModel by sharedViewModel<SharedViewModel>()
+    private var genres = ArrayList<Int>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,12 +29,11 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
-                search_view.clearFocus()
-                observeLD(viewModel.loadData(p0!!))
                 return false
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
+                sharedViewModel.getBooksByTitle(p0!!)
                 return true
             }
         })
@@ -44,25 +41,37 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private fun initFilter() {
         filter_button.setOnClickListener {
-            val action = SearchFragmentDirections.actionToFilter()
-            findNavController().navigate(action)
+            showDialog()
         }
+    }
+
+    private fun showDialog() {
+        val bottomSheetFragment = BottomSheetFragment({ genres ->
+            if (genres.isNullOrEmpty())
+                sharedViewModel.getBooksList()
+            else
+                sharedViewModel.getFilteredBooks(genres)
+        }, genres)
+        bottomSheetFragment.show(activity?.supportFragmentManager!!, bottomSheetFragment.tag)
     }
 
     private fun initViews() {
         recycler_view.layoutManager = GridLayoutManager(context, 2)
         recycler_view.adapter = BookListAdapter()
+        if (genres.isNullOrEmpty())
+            sharedViewModel.getBooksList()
+        else
+            sharedViewModel.getFilteredBooks(genres)
     }
 
     private fun observeVm() {
-        try {
-            observeLD(viewModel.loadData(args.genres))
-        } catch (e: Exception) {
-            observeLD(viewModel.getBooks())
+        observeLD(sharedViewModel.booksLD)
+        sharedViewModel.selectedLD.observe(viewLifecycleOwner) {
+            genres = it
         }
     }
 
-    private fun observeLD(data: LiveData<List<com.example.booksapp.data.db.Book>>) {
+    private fun observeLD(data: LiveData<List<Book>>) {
         data.observe(viewLifecycleOwner) {
             (recycler_view.adapter as BookListAdapter).submitList(it)
         }

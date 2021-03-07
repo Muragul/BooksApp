@@ -23,9 +23,6 @@
         <action
             android:id="@+id/action_to_filter"
             app:destination="@+id/filter" />
-        <argument
-            android:name="genres"
-            app:argType="integer" />
     </fragment>
 
     <fragment
@@ -48,11 +45,7 @@
         android:label="bottom_sheet_fragment">
         <action
             android:id="@+id/action_back_to_search"
-            app:destination="@+id/search">
-            <argument
-                android:name="genres"
-                app:argType="integer" />
-        </action>
+            app:destination="@+id/search"/>
     </fragment>
 
 </navigation>

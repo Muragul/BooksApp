@@ -3,32 +3,33 @@ package com.example.booksapp.ui.main.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
+import android.widget.CheckedTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.booksapp.R
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.booksapp.data.db.Genre
 
-class GenreListAdapter(private val onItemClick: (itemId: Int) -> Unit) :
-    ListAdapter<Genre, GenreListAdapter.GenreViewHolder>(GENRES_COMPARATOR) {
+class GenreListAdapter(
+    private val onItemClick: (genres: ArrayList<Int>) -> Unit,
+    var genres: ArrayList<Int>
+) : ListAdapter<Genre, GenreListAdapter.GenreViewHolder>(GENRES_COMPARATOR) {
 
-    class GenreViewHolder(itemView: View, private val onItemClick: (itemId: Int) -> Unit) :
-        RecyclerView.ViewHolder(itemView) {
-        private val genreTitle: TextView = itemView.findViewById(R.id.genre_title)
+    class GenreViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val genreTitle: CheckedTextView = itemView.findViewById(R.id.genre_title)
 
-        fun bind(genre: Genre) {
+        fun bind(genre: Genre, isChecked: Boolean) {
             genreTitle.text = genre.title
-            itemView.setOnClickListener {
-                onItemClick.invoke(genre.id)
+            if (isChecked) {
+                genreTitle.setCheckMarkDrawable(R.drawable.ic_selected)
             }
         }
 
         companion object {
-            fun create(parent: ViewGroup, onItemClick: (itemId: Int) -> Unit): GenreViewHolder {
+            fun create(parent: ViewGroup): GenreViewHolder {
                 val view: View =
                     LayoutInflater.from(parent.context).inflate(R.layout.item_genre, parent, false)
-                return GenreViewHolder(view, onItemClick)
+                return GenreViewHolder(view)
             }
         }
     }
@@ -54,12 +55,23 @@ class GenreListAdapter(private val onItemClick: (itemId: Int) -> Unit) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreViewHolder {
-        return GenreViewHolder.create(parent, onItemClick)
+        return GenreViewHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: GenreViewHolder, position: Int) {
         val currentItem = getItem(position)
-        holder.bind(currentItem)
+        holder.bind(currentItem, genres.contains(currentItem.id))
+        val item = holder.itemView.findViewById<CheckedTextView>(R.id.genre_title)
+        item.setOnClickListener {
+            if (genres.contains(currentItem.id)) {
+                item.checkMarkDrawable = null
+                genres.remove(currentItem.id)
+            } else {
+                item.setCheckMarkDrawable(R.drawable.ic_selected)
+                genres.add(currentItem.id)
+            }
+            onItemClick.invoke(genres)
+        }
     }
 
 }
