@@ -1,25 +1,18 @@
 package com.example.booksapp.data.repository
 
-import android.content.Context
 import com.example.booksapp.data.api.ApiService
+import com.example.booksapp.data.db.AppDao
 import com.example.booksapp.data.db.Genre
-import com.example.booksapp.data.db.GenreDao
-import com.example.booksapp.data.db.GenreDatabase
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.collect
 import retrofit2.Response
+import java.lang.Exception
 
-abstract class BaseGenreDataStore(
-    @PublishedApi internal val service: ApiService,
-    var context: Context
-) {
+abstract class GenresDataStore(@PublishedApi internal val service: ApiService, val appDao: AppDao) {
     abstract fun loadData(): Flow<List<Genre>>
-
-    var genreDao: GenreDao = GenreDatabase.getDatabase(context).genreDao()
 
     inline fun fetchData(crossinline call: (ApiService) -> Deferred<Response<List<Genre>>>): Flow<List<Genre>> =
         flow {
@@ -28,13 +21,12 @@ abstract class BaseGenreDataStore(
                 val response = request.await()
                 if (response.isSuccessful) {
                     val result = response.body()!!
-                    genreDao.insertList(result)
+                    appDao.insertGenresList(result)
                     emit(result)
-                } else {
-                    genreDao.getGenreList().collect { value: List<Genre> -> emit(value) }
-                }
+                } else
+                    appDao.getGenreList()
             } catch (e: Exception) {
-                genreDao.getGenreList().collect { value: List<Genre> -> emit(value) }
+                appDao.getGenreList()
             }
         }.flowOn(Dispatchers.IO)
 }
