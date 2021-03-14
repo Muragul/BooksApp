@@ -1,7 +1,7 @@
 package com.example.booksapp.domain
 
 import com.example.booksapp.data.db.AppDao
-import com.example.booksapp.data.db.Book
+import com.example.booksapp.data.model.Book
 import kotlinx.coroutines.flow.Flow
 
 class GetBookListUseCase(

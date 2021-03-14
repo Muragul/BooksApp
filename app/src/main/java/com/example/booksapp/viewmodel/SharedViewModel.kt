@@ -2,6 +2,8 @@ package com.example.booksapp.viewmodel
 
 import androidx.lifecycle.*
 import com.example.booksapp.data.db.*
+import com.example.booksapp.data.model.Book
+import com.example.booksapp.data.model.Genre
 import com.example.booksapp.domain.GetBookListUseCase
 import com.example.booksapp.domain.GetGenreListUseCase
 import kotlinx.coroutines.Dispatchers

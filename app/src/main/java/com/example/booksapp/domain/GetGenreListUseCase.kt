@@ -1,7 +1,7 @@
 package com.example.booksapp.domain
 
 import com.example.booksapp.data.db.AppDao
-import com.example.booksapp.data.db.Genre
+import com.example.booksapp.data.model.Genre
 import kotlinx.coroutines.flow.Flow
 
 class GetGenreListUseCase(

@@ -3,7 +3,7 @@ package com.example.booksapp.data.repository
 import com.example.booksapp.domain.BookListRepository
 import com.example.booksapp.data.api.ApiService
 import com.example.booksapp.data.db.AppDao
-import com.example.booksapp.data.db.Book
+import com.example.booksapp.data.model.Book
 import kotlinx.coroutines.flow.Flow
 
 class BookRepository(apiService: ApiService, appDao: AppDao) : BookListRepository,

@@ -14,7 +14,7 @@
 
     <Button
         android:id="@+id/apply_filter_button"
-        android:text="@string/filter_button"
+        android:text="@string/apply_button"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

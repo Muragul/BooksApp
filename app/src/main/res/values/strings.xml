@@ -10,6 +10,12 @@
 
     <string name="now_reading_title">Now reading</string>
     <string name="newly_added_title">Newly added</string>
+    <string name="see_all">See all</string>
+    <string name="all_books">All books</string>
 
     <string name="filter_button">Filter</string>
+    <string name="apply_button">Apply</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
