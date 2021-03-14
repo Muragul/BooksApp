@@ -5,12 +5,12 @@ import android.view.View
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
-import androidx.recyclerview.widget.GridLayoutManager
 import com.example.booksapp.R
-import com.example.booksapp.data.db.Book
+import com.example.booksapp.data.model.Book
 import com.example.booksapp.ui.main.adapter.BookListAdapter
 import com.example.booksapp.viewmodel.SharedViewModel
 import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.fragment_search.swipe_refresh_layout
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
@@ -19,6 +19,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        swipe_refresh_layout.setOnRefreshListener {
+            getListUsingGenres(genres)
+            swipe_refresh_layout.isRefreshing = false
+        }
         initSearch()
         initFilter()
         initViews()
@@ -33,7 +37,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
-                sharedViewModel.getBooksByTitle(p0!!)
+                if (!p0.isNullOrBlank())
+                    sharedViewModel.getBooksByTitle(p0)
+                else
+                    getListUsingGenres(genres)
                 return true
             }
         })
@@ -46,22 +53,15 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     private fun showDialog() {
-        val bottomSheetFragment = BottomSheetFragment({ genres ->
-            if (genres.isNullOrEmpty())
-                sharedViewModel.getBooksList()
-            else
-                sharedViewModel.getFilteredBooks(genres)
+        val bottomSheetFragment = BottomSheetFragment({
+            getListUsingGenres(genres)
         }, genres)
         bottomSheetFragment.show(activity?.supportFragmentManager!!, bottomSheetFragment.tag)
     }
 
     private fun initViews() {
-        recycler_view.layoutManager = GridLayoutManager(context, 2)
         recycler_view.adapter = BookListAdapter()
-        if (genres.isNullOrEmpty())
-            sharedViewModel.getBooksList()
-        else
-            sharedViewModel.getFilteredBooks(genres)
+        getListUsingGenres(genres)
     }
 
     private fun observeVm() {
@@ -75,6 +75,13 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         data.observe(viewLifecycleOwner) {
             (recycler_view.adapter as BookListAdapter).submitList(it)
         }
+    }
+
+    private fun getListUsingGenres(genres: ArrayList<Int>) {
+        if (genres.isNullOrEmpty())
+            sharedViewModel.getBooksList()
+        else
+            sharedViewModel.getFilteredBooks(genres)
     }
 
 }

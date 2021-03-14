@@ -11,6 +11,13 @@
         <action
             android:id="@+id/action_to_search"
             app:destination="@+id/search" />
+        <action
+            android:id="@+id/action_to_reading"
+            app:destination="@id/reading">
+            <argument
+                android:name="mode"
+                app:argType="integer"/>
+        </action>
     </fragment>
 
     <fragment
@@ -20,9 +27,6 @@
         <action
             android:id="@+id/action_to_scan"
             app:destination="@+id/scan" />
-        <action
-            android:id="@+id/action_to_filter"
-            app:destination="@+id/filter" />
     </fragment>
 
     <fragment
@@ -40,12 +44,15 @@
         android:label="fragment_profile" />
 
     <fragment
-        android:id="@+id/filter"
-        android:name="com.example.booksapp.ui.main.fragment.BottomSheetFragment"
-        android:label="bottom_sheet_fragment">
+        android:id="@+id/reading"
+        android:name="com.example.booksapp.ui.main.fragment.AllReadingFragment"
+        android:label="all_reading_fragment">
         <action
-            android:id="@+id/action_back_to_search"
-            app:destination="@+id/search"/>
+            android:id="@+id/action_back_to_home"
+            app:destination="@+id/home" />
+        <argument
+            android:name="mode"
+            app:argType="integer"/>
     </fragment>
 
 </navigation>

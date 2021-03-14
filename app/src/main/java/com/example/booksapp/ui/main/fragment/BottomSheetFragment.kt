@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_bottom_sheet.view.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class BottomSheetFragment(
-    private val onFilter: (genresList: ArrayList<Int>) -> Unit,
+    private val onFilter: () -> Unit,
     var genres: ArrayList<Int>
 ) : BottomSheetDialogFragment() {
 
@@ -34,7 +34,7 @@ class BottomSheetFragment(
             if (!genres.isNullOrEmpty()) {
                 sharedViewModel.selectedLD.postValue(genres)
             }
-            onFilter.invoke(genres)
+            onFilter.invoke()
             dismiss()
         }
         return rootView

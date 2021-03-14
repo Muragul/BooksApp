@@ -2,7 +2,7 @@ package com.example.booksapp.data.repository
 
 import com.example.booksapp.data.api.ApiService
 import com.example.booksapp.data.db.AppDao
-import com.example.booksapp.data.db.Book
+import com.example.booksapp.data.model.Book
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

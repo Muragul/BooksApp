@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.booksapp.R
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.example.booksapp.data.db.Genre
+import com.example.booksapp.data.model.Genre
 
 class GenreListAdapter(
     private val onItemClick: (genres: ArrayList<Int>) -> Unit,
