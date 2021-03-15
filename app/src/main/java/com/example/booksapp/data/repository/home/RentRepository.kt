@@ -1,9 +1,8 @@
-package com.example.booksapp.data.repository
+package com.example.booksapp.data.repository.home
 
 import com.example.booksapp.data.api.ApiService
-import com.example.booksapp.data.model.Book
 import com.example.booksapp.data.model.Rent
-import com.example.booksapp.domain.RentListRepository
+import com.example.booksapp.domain.home.RentListRepository
 import kotlinx.coroutines.flow.Flow
 
 class RentRepository(apiService: ApiService): RentListRepository, RentDataStore(apiService) {

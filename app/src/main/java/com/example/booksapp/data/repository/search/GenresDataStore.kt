@@ -1,4 +1,4 @@
-package com.example.booksapp.data.repository
+package com.example.booksapp.data.repository.search
 
 import com.example.booksapp.data.api.ApiService
 import com.example.booksapp.data.db.AppDao

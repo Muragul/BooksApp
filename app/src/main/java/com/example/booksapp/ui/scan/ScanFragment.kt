@@ -1,4 +1,4 @@
-package com.example.booksapp.ui.main.fragment
+package com.example.booksapp.ui.scan
 
 import androidx.fragment.app.Fragment
 import com.example.booksapp.R

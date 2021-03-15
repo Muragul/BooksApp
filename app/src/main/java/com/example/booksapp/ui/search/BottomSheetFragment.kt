@@ -1,4 +1,4 @@
-package com.example.booksapp.ui.main.fragment
+package com.example.booksapp.ui.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.booksapp.R
-import com.example.booksapp.ui.main.adapter.GenreListAdapter
-import com.example.booksapp.viewmodel.SharedViewModel
+import com.example.booksapp.ui.adapter.GenreListAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_bottom_sheet.view.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel

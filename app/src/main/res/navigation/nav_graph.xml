@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.example.booksapp.ui.main.fragment.HomeFragment"
+        android:name="com.example.booksapp.ui.home.HomeFragment"
         android:label="fragment_home">
         <action
             android:id="@+id/action_to_search"
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/search"
-        android:name="com.example.booksapp.ui.main.fragment.SearchFragment"
+        android:name="com.example.booksapp.ui.search.SearchFragment"
         android:label="fragment_search">
         <action
             android:id="@+id/action_to_scan"
@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/scan"
-        android:name="com.example.booksapp.ui.main.fragment.ScanFragment"
+        android:name="com.example.booksapp.ui.scan.ScanFragment"
         android:label="fragment_scan">
         <action
             android:id="@+id/action_to_profile"
@@ -40,12 +40,12 @@
 
     <fragment
         android:id="@+id/profile"
-        android:name="com.example.booksapp.ui.main.fragment.ProfileFragment"
+        android:name="com.example.booksapp.ui.profile.ProfileFragment"
         android:label="fragment_profile" />
 
     <fragment
         android:id="@+id/reading"
-        android:name="com.example.booksapp.ui.main.fragment.AllReadingFragment"
+        android:name="com.example.booksapp.ui.home.AllReadingFragment"
         android:label="all_reading_fragment">
         <action
             android:id="@+id/action_back_to_home"
