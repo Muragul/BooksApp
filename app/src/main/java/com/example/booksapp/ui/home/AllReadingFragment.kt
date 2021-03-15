@@ -1,4 +1,4 @@
-package com.example.booksapp.ui.main.fragment
+package com.example.booksapp.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,8 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.booksapp.R
 import com.example.booksapp.data.model.Rent
-import com.example.booksapp.ui.main.adapter.RentListAdapter
-import com.example.booksapp.viewmodel.RentViewModel
+import com.example.booksapp.ui.adapter.RentListAdapter
 import kotlinx.android.synthetic.main.fragment_all_reading.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -41,8 +40,8 @@ class AllReadingFragment : Fragment(R.layout.fragment_all_reading) {
 
     private fun observeVm() {
         when (args.mode) {
-            1 -> observeLd(viewModel.getRentList())
-            2 -> observeLd(viewModel.getReadingList("99"))
+            1 -> observeLd(viewModel.getFullRentList())
+            2 -> observeLd(viewModel.getNewAdded("2b68bd4a-9346-4621-8e05-4acd795a274c"))
         }
     }
 

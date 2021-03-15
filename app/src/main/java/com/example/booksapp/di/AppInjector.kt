@@ -2,17 +2,17 @@ package com.example.booksapp.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.booksapp.domain.GetBookListUseCase
+import com.example.booksapp.domain.search.GetBookListUseCase
 import com.example.booksapp.data.api.ApiClient.getApiService
 import com.example.booksapp.data.db.AppDao
 import com.example.booksapp.data.db.AppDatabase
-import com.example.booksapp.data.repository.BookRepository
-import com.example.booksapp.data.repository.GenreRepository
-import com.example.booksapp.data.repository.RentRepository
-import com.example.booksapp.domain.GetGenreListUseCase
-import com.example.booksapp.domain.GetRentListUseCase
-import com.example.booksapp.viewmodel.RentViewModel
-import com.example.booksapp.viewmodel.SharedViewModel
+import com.example.booksapp.data.repository.search.BookRepository
+import com.example.booksapp.data.repository.search.GenreRepository
+import com.example.booksapp.data.repository.home.RentRepository
+import com.example.booksapp.domain.search.GetGenreListUseCase
+import com.example.booksapp.domain.home.GetRentListUseCase
+import com.example.booksapp.ui.home.RentViewModel
+import com.example.booksapp.ui.search.SharedViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -29,13 +29,13 @@ val viewModelModule = module {
 val repositoryModule = module {
     single { BookRepository(get(), get()) }
     single { GenreRepository(get(), get()) }
-    single { RentRepository(get())}
+    single { RentRepository(get()) }
 }
 
 val useCaseModule = module {
     single { GetBookListUseCase(get<BookRepository>(), get()) }
     single { GetGenreListUseCase(get<GenreRepository>(), get()) }
-    single { GetRentListUseCase(get<RentRepository>())}
+    single { GetRentListUseCase(get<RentRepository>()) }
 }
 
 val dataBaseModule = module {

@@ -1,4 +1,4 @@
-package com.example.booksapp.ui.main.fragment
+package com.example.booksapp.ui.search
 
 import android.os.Bundle
 import android.view.View
@@ -7,8 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import com.example.booksapp.R
 import com.example.booksapp.data.model.Book
-import com.example.booksapp.ui.main.adapter.BookListAdapter
-import com.example.booksapp.viewmodel.SharedViewModel
+import com.example.booksapp.ui.adapter.BookListAdapter
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.swipe_refresh_layout
 import org.koin.android.viewmodel.ext.android.sharedViewModel

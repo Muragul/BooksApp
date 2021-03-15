@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".ui.main.fragment.BottomSheetFragment">
+    tools:context=".ui.search.BottomSheetFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/genres_recycler_view"

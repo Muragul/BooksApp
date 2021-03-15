@@ -1,4 +1,4 @@
-package com.example.booksapp.domain
+package com.example.booksapp.domain.search
 
 import com.example.booksapp.data.db.AppDao
 import com.example.booksapp.data.model.Genre

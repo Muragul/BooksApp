@@ -1,14 +1,15 @@
-package com.example.booksapp.viewmodel
+package com.example.booksapp.ui.home
 
 import androidx.lifecycle.*
 import com.example.booksapp.data.model.Rent
-import com.example.booksapp.domain.GetRentListUseCase
+import com.example.booksapp.domain.home.GetRentListUseCase
 
 class RentViewModel(private val rentListUseCase: GetRentListUseCase) : ViewModel() {
-    fun getRentList(): LiveData<List<Rent>> {
+    fun getFullRentList(): LiveData<List<Rent>> {
         return rentListUseCase.getRentList().asLiveData()
     }
-    fun getReadingList(userId: String): LiveData<List<Rent>> {
+
+    fun getNewAdded(userId: String): LiveData<List<Rent>> {
         return rentListUseCase.getReadingList(userId).asLiveData()
     }
 }

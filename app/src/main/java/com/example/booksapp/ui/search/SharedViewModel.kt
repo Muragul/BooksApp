@@ -1,11 +1,11 @@
-package com.example.booksapp.viewmodel
+package com.example.booksapp.ui.search
 
 import androidx.lifecycle.*
 import com.example.booksapp.data.db.*
 import com.example.booksapp.data.model.Book
 import com.example.booksapp.data.model.Genre
-import com.example.booksapp.domain.GetBookListUseCase
-import com.example.booksapp.domain.GetGenreListUseCase
+import com.example.booksapp.domain.search.GetBookListUseCase
+import com.example.booksapp.domain.search.GetGenreListUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
