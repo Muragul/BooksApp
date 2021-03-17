@@ -4,16 +4,16 @@ import androidx.lifecycle.*
 import com.example.booksapp.data.db.*
 import com.example.booksapp.data.model.Book
 import com.example.booksapp.data.model.Genre
-import com.example.booksapp.domain.search.GetBookListUseCase
-import com.example.booksapp.domain.search.GetGenreListUseCase
+import com.example.booksapp.domain.search.GetBooksUseCase
+import com.example.booksapp.domain.search.GetGenresUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
 import java.lang.Exception
 
 class SharedViewModel(
-    private val bookListUseCase: GetBookListUseCase,
-    private val genreListUseCase: GetGenreListUseCase,
+    private val booksUseCase: GetBooksUseCase,
+    private val genresUseCase: GetGenresUseCase,
     private val appDao: AppDao
 ) : ViewModel() {
 
@@ -24,10 +24,10 @@ class SharedViewModel(
     init {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                bookListUseCase.getBooks().collect {
+                booksUseCase.getBooks().collect {
                     appDao.insertBookList(it)
                 }
-                genreListUseCase.getGenres().collect {
+                genresUseCase.getGenres().collect {
                     appDao.insertGenresList(it)
                 }
             } catch (e: Exception) { }
@@ -35,19 +35,19 @@ class SharedViewModel(
     }
 
     fun getBooksList() {
-        booksLD.postValue(bookListUseCase.getBooksFromDb())
+        booksLD.postValue(booksUseCase.getBooksFromDb())
     }
 
     fun getFilteredBooks(genres: ArrayList<Int>) {
-        booksLD.postValue(bookListUseCase.getFilteredBooksList(genres))
+        booksLD.postValue(booksUseCase.getFilteredBooksList(genres))
     }
 
     fun getBooksByTitle(title: String) {
-        booksLD.postValue(bookListUseCase.getBooksByTitle(title))
+        booksLD.postValue(booksUseCase.getBooksByTitle(title))
     }
 
     fun getGenres() {
-        genresLD.postValue(genreListUseCase.getGenresFromDb())
+        genresLD.postValue(genresUseCase.getGenresFromDb())
     }
 
 }

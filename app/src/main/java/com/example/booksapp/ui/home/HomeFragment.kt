@@ -1,11 +1,13 @@
 package com.example.booksapp.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.example.booksapp.R
-import com.example.booksapp.ui.adapter.RentListAdapter
+import com.example.booksapp.ui.adapter.RentsAdapter
+import com.example.booksapp.ui.scan.DetailActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -35,23 +37,29 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun initViews() {
-        recyclerViewReading.adapter = RentListAdapter()
-        recyclerViewAdded.adapter = RentListAdapter()
+        recyclerViewReading.adapter = RentsAdapter { id: Int -> onBookClicked(id) }
+        recyclerViewAdded.adapter = RentsAdapter { id: Int -> onBookClicked(id) }
+    }
+
+    private fun onBookClicked(id: Int) {
+        val intent = Intent(context, DetailActivity::class.java)
+        intent.putExtra("book_id", id)
+        startActivity(intent)
     }
 
     private fun observeVm() {
         viewModel.getFullRentList().observe(viewLifecycleOwner) {
             if (it.size > 5)
-                (recyclerViewReading.adapter as RentListAdapter).submitList(it.subList(0, 5))
+                (recyclerViewReading.adapter as RentsAdapter).submitList(it.subList(0, 5))
             else
-                (recyclerViewReading.adapter as RentListAdapter).submitList(it)
+                (recyclerViewReading.adapter as RentsAdapter).submitList(it)
         }
-        viewModel.getNewAdded("2b68bd4a-9346-4621-8e05-4acd795a274c").observe(viewLifecycleOwner) {
+        viewModel.getNewAdded("123").observe(viewLifecycleOwner) {
             if (it.size > 5)
-                (recyclerViewAdded.adapter as RentListAdapter).submitList(
+                (recyclerViewAdded.adapter as RentsAdapter).submitList(
                     it.subList(0, 5).sortedByDescending { item -> item.updatedAt })
             else
-                (recyclerViewAdded.adapter as RentListAdapter).submitList(it.sortedByDescending { item -> item.updatedAt })
+                (recyclerViewAdded.adapter as RentsAdapter).submitList(it.sortedByDescending { item -> item.updatedAt })
         }
     }
 

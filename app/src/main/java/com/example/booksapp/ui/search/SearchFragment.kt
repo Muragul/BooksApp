@@ -1,5 +1,6 @@
 package com.example.booksapp.ui.search
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
@@ -7,7 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import com.example.booksapp.R
 import com.example.booksapp.data.model.Book
-import com.example.booksapp.ui.adapter.BookListAdapter
+import com.example.booksapp.ui.adapter.BooksAdapter
+import com.example.booksapp.ui.scan.DetailActivity
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.swipe_refresh_layout
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -59,7 +61,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     private fun initViews() {
-        recycler_view.adapter = BookListAdapter()
+        recycler_view.adapter = BooksAdapter { id: Int -> onBookClicked(id) }
         getListUsingGenres(genres)
     }
 
@@ -72,7 +74,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private fun observeLD(data: LiveData<List<Book>>) {
         data.observe(viewLifecycleOwner) {
-            (recycler_view.adapter as BookListAdapter).submitList(it)
+            (recycler_view.adapter as BooksAdapter).submitList(it)
         }
     }
 
@@ -81,6 +83,12 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             sharedViewModel.getBooksList()
         else
             sharedViewModel.getFilteredBooks(genres)
+    }
+
+    private fun onBookClicked(id: Int) {
+        val intent = Intent(context, DetailActivity::class.java)
+        intent.putExtra("book_id", id)
+        startActivity(intent)
     }
 
 }

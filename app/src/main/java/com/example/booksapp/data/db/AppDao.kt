@@ -16,7 +16,7 @@ interface AppDao {
     @Query("SELECT * FROM books_table WHERE genre_id = :genreId")
     fun getBooksByGenre(genreId: Int): List<Book>
 
-    @Query("SELECT * FROM books_table WHERE title = :title")
+    @Query("SELECT * FROM books_table WHERE title LIKE :title")
     fun getBooksByTitle(title: String): List<Book>
 
     @Query("SELECT * FROM books_table WHERE isbn = :isbn")

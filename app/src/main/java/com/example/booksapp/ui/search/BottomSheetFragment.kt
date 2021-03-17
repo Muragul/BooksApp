@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.booksapp.R
-import com.example.booksapp.ui.adapter.GenreListAdapter
+import com.example.booksapp.ui.adapter.GenresAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_bottom_sheet.view.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -42,13 +42,13 @@ class BottomSheetFragment(
     private fun initViews() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter =
-            GenreListAdapter({ genresList -> genres = genresList }, genres)
+            GenresAdapter({ genresList -> genres = genresList }, genres)
         sharedViewModel.getGenres()
     }
 
     private fun observeVm() {
         sharedViewModel.genresLD.observe(viewLifecycleOwner) {
-            (recyclerView.adapter as GenreListAdapter).submitList(it)
+            (recyclerView.adapter as GenresAdapter).submitList(it)
         }
     }
 

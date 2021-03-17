@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.booksapp.data.model.Genre
 
-class GenreListAdapter(
+class GenresAdapter(
     private val onItemClick: (genres: ArrayList<Int>) -> Unit,
     var genres: ArrayList<Int>
-) : ListAdapter<Genre, GenreListAdapter.GenreViewHolder>(GENRES_COMPARATOR) {
+) : ListAdapter<Genre, GenresAdapter.GenreViewHolder>(GENRES_COMPARATOR) {
 
     class GenreViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val genreTitle: CheckedTextView = itemView.findViewById(R.id.genre_title)
