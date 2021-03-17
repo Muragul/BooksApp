@@ -5,10 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.scan.ScanFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <SurfaceView
+        android:id="@+id/camera_surface_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Scan Fragment" />
+        android:layout_height="match_parent"/>
 
 </FrameLayout>

@@ -11,6 +11,7 @@
     <color name="color_light_background">#f6ded4</color>
     <color name="color_coffee_dark">#784643</color>
     <color name="see_all_button">#317dff</color>
+    <color name="borrow_button_background">#e8e8e8</color>
 
     <color name="toolbar_background_color">#f6f7f8</color>
     <color name="toolbar_border_color">#e3e3e3</color>

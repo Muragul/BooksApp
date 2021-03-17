@@ -4,11 +4,11 @@ import com.example.booksapp.data.db.AppDao
 import com.example.booksapp.data.model.Genre
 import kotlinx.coroutines.flow.Flow
 
-class GetGenreListUseCase(
-    private val genreListRepository: GenreListRepository,
+class GetGenresUseCase(
+    private val genresRepositoryInterface: GenresRepositoryInterface,
     private val appDao: AppDao
 ) {
-    fun getGenres(): Flow<List<Genre>> = genreListRepository.loadData()
+    fun getGenres(): Flow<List<Genre>> = genresRepositoryInterface.loadData()
 
     fun getGenresFromDb(): List<Genre> = appDao.getGenreList()
 }

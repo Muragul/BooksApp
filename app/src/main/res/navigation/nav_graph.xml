@@ -16,7 +16,7 @@
             app:destination="@id/reading">
             <argument
                 android:name="mode"
-                app:argType="integer"/>
+                app:argType="integer" />
         </action>
     </fragment>
 
@@ -52,7 +52,7 @@
             app:destination="@+id/home" />
         <argument
             android:name="mode"
-            app:argType="integer"/>
+            app:argType="integer" />
     </fragment>
 
 </navigation>

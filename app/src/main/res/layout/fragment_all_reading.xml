@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="@string/all_books"
+                android:text="@string/all_books_toolbar"
                 android:textColor="@color/black"
                 android:textSize="26sp"
                 app:layout_constraintStart_toEndOf="@id/back"

@@ -1,5 +1,6 @@
 package com.example.booksapp.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -8,7 +9,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.booksapp.R
 import com.example.booksapp.data.model.Rent
-import com.example.booksapp.ui.adapter.RentListAdapter
+import com.example.booksapp.ui.adapter.RentsAdapter
+import com.example.booksapp.ui.scan.DetailActivity
 import kotlinx.android.synthetic.main.fragment_all_reading.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,7 +29,7 @@ class AllReadingFragment : Fragment(R.layout.fragment_all_reading) {
     }
 
     private fun initViews() {
-        recycler_view.adapter = RentListAdapter()
+        recycler_view.adapter = RentsAdapter { id: Int -> onBookClicked(id) }
         back.setOnClickListener {
             val action = AllReadingFragmentDirections.actionBackToHome()
             findNavController().navigate(action)
@@ -41,13 +43,20 @@ class AllReadingFragment : Fragment(R.layout.fragment_all_reading) {
     private fun observeVm() {
         when (args.mode) {
             1 -> observeLd(viewModel.getFullRentList())
-            2 -> observeLd(viewModel.getNewAdded("2b68bd4a-9346-4621-8e05-4acd795a274c"))
+            2 -> observeLd(viewModel.getNewAdded("123"))
         }
     }
 
     private fun observeLd(liveData: LiveData<List<Rent>>) {
         liveData.observe(viewLifecycleOwner) {
-            (recycler_view.adapter as RentListAdapter).submitList(it)
+            (recycler_view.adapter as RentsAdapter).submitList(it)
         }
     }
+
+    private fun onBookClicked(id: Int) {
+        val intent = Intent(context, DetailActivity::class.java)
+        intent.putExtra("book_id", id)
+        startActivity(intent)
+    }
+
 }
