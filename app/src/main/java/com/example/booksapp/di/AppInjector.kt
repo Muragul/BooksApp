@@ -41,7 +41,7 @@ val useCaseModule = module {
     single { GetBooksUseCase(get<BookRepositoryImpl>(), get()) }
     single { GetGenresUseCase(get<GenreRepositoryImpl>(), get()) }
     single { GetRentsUseCase(get<RentsRepositoryImpl>()) }
-    single { GetBookDetailUseCase(get<BookDetailRepositoryImpl>()) }
+    single { GetBookDetailUseCase(get<BookDetailRepositoryImpl>(), get()) }
 }
 
 val dataBaseModule = module {

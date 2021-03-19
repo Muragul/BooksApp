@@ -4,11 +4,14 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.bumptech.glide.Glide
 import com.example.booksapp.R
+import com.example.booksapp.data.model.Book
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.lang.Exception
 import java.time.LocalDateTime
 
 class DetailActivity : AppCompatActivity(R.layout.activity_detail) {
@@ -48,7 +51,16 @@ class DetailActivity : AppCompatActivity(R.layout.activity_detail) {
     }
 
     private fun observeVm() {
-        viewModel.getBookById(id).observe(this) {
+        observeLd(viewModel.getBookById(id))
+    }
+
+    private fun observeByIsbn() {
+        val isbn = intent.getStringExtra("book_isbn").toString()
+        observeLd(viewModel.getBookByIsbn(isbn))
+    }
+
+    private fun observeLd(liveData: LiveData<Book>) {
+        liveData.observe(this) {
             if (it.image != null)
                 Glide.with(this).load(baseUrl + it.image).into(book_image)
             else

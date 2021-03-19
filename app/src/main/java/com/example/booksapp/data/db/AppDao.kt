@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.booksapp.data.model.Book
 import com.example.booksapp.data.model.Genre
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AppDao {
@@ -20,7 +21,7 @@ interface AppDao {
     fun getBooksByTitle(title: String): List<Book>
 
     @Query("SELECT * FROM books_table WHERE isbn = :isbn")
-    fun getBooksByISBN(isbn: String): List<Book>
+    fun getBooksByISBN(isbn: String): Flow<Book>
 
     @Query("SELECT * FROM books_table where genre_id IN (:genres)")
     fun getFilteredBooks(genres: List<Int>): List<Book>

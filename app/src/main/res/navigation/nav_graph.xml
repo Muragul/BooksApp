@@ -45,7 +45,7 @@
 
     <fragment
         android:id="@+id/reading"
-        android:name="com.example.booksapp.ui.home.AllReadingFragment"
+        android:name="com.example.booksapp.ui.home.ReadingFragment"
         android:label="all_reading_fragment">
         <action
             android:id="@+id/action_back_to_home"
