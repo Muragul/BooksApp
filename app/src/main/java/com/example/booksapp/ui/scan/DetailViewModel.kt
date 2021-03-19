@@ -16,4 +16,8 @@ class DetailViewModel(private val bookDetailUseCase: GetBookDetailUseCase) : Vie
     fun createRent(body: JsonObject): LiveData<Rent> {
         return bookDetailUseCase.createRent(body).asLiveData()
     }
+
+    fun getBookByIsbn(isbn: String): LiveData<Book> {
+        return bookDetailUseCase.getBookByIsbn(isbn).asLiveData()
+    }
 }

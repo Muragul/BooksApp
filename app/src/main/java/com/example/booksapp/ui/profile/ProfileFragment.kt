@@ -1,6 +1,6 @@
 package com.example.booksapp.ui.profile
 
-import androidx.fragment.app.Fragment
-import com.example.booksapp.R
+import com.example.booksapp.databinding.FragmentProfileBinding
+import com.example.booksapp.utils.BindingFragment
 
-class ProfileFragment : Fragment(R.layout.fragment_profile)
+class ProfileFragment : BindingFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate)
