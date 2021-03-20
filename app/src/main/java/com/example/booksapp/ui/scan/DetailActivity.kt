@@ -51,23 +51,25 @@ class DetailActivity : AppCompatActivity(R.layout.activity_detail) {
     }
 
     private fun observeVm() {
-        observeLd(viewModel.getBookById(id))
-    }
-
-    private fun observeByIsbn() {
         val isbn = intent.getStringExtra("book_isbn").toString()
-        observeLd(viewModel.getBookByIsbn(isbn))
+        if (id == 0)
+            observeLd(viewModel.getBookByIsbn(isbn))
+        else
+            observeLd(viewModel.getBookById(id))
     }
 
     private fun observeLd(liveData: LiveData<Book>) {
         liveData.observe(this) {
-            if (it.image != null)
-                Glide.with(this).load(baseUrl + it.image).into(book_image)
-            else
-                Glide.with(this).load(R.drawable.mock_image).into(book_image)
-            book_name.text = it.title
-            book_author.text = it.author
-            publish_date.text = it.publish_date
+            try {
+                if (it.image != null)
+                    Glide.with(this).load(baseUrl + it.image).into(book_image)
+                else
+                    Glide.with(this).load(R.drawable.mock_image).into(book_image)
+                book_name.text = it.title
+                book_author.text = it.author
+                publish_date.text = it.publish_date
+            } catch (e: Exception) {
+            }
         }
     }
 
